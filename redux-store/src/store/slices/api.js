@@ -4,7 +4,7 @@ export const api = createApi({
     baseQuery:fetchBaseQuery({baseUrl:'https://jsonplaceholder.typicode.com'}),
     endpoints:(builder)=>({
         feachUser:builder.query({
-            query:(username,email)=>`users?username=${username}&email=${email}`,
+            query:({username,email})=>`users?username=${username}&email=${email}`,
         }),
         feachGoods:builder.query({
             query:(searchReqest)=>`photos?title=${searchReqest}`,

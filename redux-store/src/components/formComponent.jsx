@@ -3,26 +3,23 @@ import { useForm } from "react-hook-form";
 import { emailValidation, nameValidation } from "../utils";
 import { useNavigate } from "react-router-dom";
 import { useFeachUserQuery } from "../store/slices/api";
+import { useState } from "react";
 
 
 
 function FormComponent() {
   const navigate = useNavigate();
+  const [userDataFeach,setUserDataFeach] = useState({})
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const {isError,isLoading,data,refetch} = useFeachUserQuery();
+  const {isError,isLoading,data} = useFeachUserQuery(userDataFeach);
+  console.log(data)
   const onSubmit = async(userData) => {
-      const{username,email}= userData;
-      if(username&&email){
-       await refetch(username,email)
-      console.log(data[0])
-      navigate('/menu')
-      }
-      
+     setUserDataFeach(userData)
   };
 
   return (
